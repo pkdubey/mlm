@@ -716,9 +716,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Support & Contact
 
-- 📧 **Email**: support@mlmnetwork.com
-- 📱 **Phone**: +91-9359533987
-- 🌐 **Website**: https://mlmnetwork.com
+- 📧 **Email**: softbenderai@gmail.com
+- 📱 **Phone**: +91-9454680972
+- 🌐 **Website**: https://softbenderai.cloud
 - 💬 **Support**: Create ticket in support section
 - 📚 **Documentation**: See `ENHANCEMENTS.md` and `USER_REGISTRATION_GUIDE.md`
 
