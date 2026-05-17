@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}Rank & Reward{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h4><i class="bi bi-trophy"></i> Rank & Reward</h4>
+    <p>Track your achievements and rewards</p>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-12">
+        <div class="stat-card">
+            <i class="bi bi-trophy-fill icon"></i>
+            <div class="value">{{ current_rank }}</div>
+            <div class="label">Current Rank</div>
+        </div>
+    </div>
+</div>
+
+<div class="card-modern mb-4">
+    <h5 class="fw-bold mb-4" style="color: #1e293b;"><i class="bi bi-bar-chart me-2" style="color: #3b82f6;"></i>Rank Criteria</h5>
+    <div class="table-modern">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Team Required</th>
+                    <th>Business Required</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rank_criteria %}
+                <tr>
+                    <td>
+                        <strong><i class="bi bi-trophy me-1"></i>{{ r.name }}</strong>
+                        {% if current_rank == r.name %}
+                        <span class="badge-modern badge-warning ms-2">Current</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ r.team }} members</td>
+                    <td>₹{{ r.business|floatformat:0 }}</td>
+                    <td>
+                        {% if current_rank == r.name %}
+                        <span class="badge-modern badge-success">Achieved</span>
+                        {% else %}
+                        <span class="badge-modern" style="background: #e5e7eb; color: #64748b;">Locked</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card-modern">
+    <h5 class="fw-bold mb-4" style="color: #1e293b;"><i class="bi bi-clock-history me-2" style="color: #3b82f6;"></i>Rank History</h5>
+    <div class="table-modern">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Achieved On</th>
+                    <th>Reward Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rank_history %}
+                <tr>
+                    <td><strong><i class="bi bi-trophy-fill me-1"></i>{{ r.rank_name }}</strong></td>
+                    <td>{{ r.achieved_at }}</td>
+                    <td>
+                        {% if r.reward_given %}
+                        <span class="badge-modern badge-success">Given</span>
+                        {% else %}
+                        <span class="badge-modern badge-warning">Pending</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center py-5">
+                        <i class="bi bi-inbox fs-1 d-block mb-3" style="color: #94a3b8;"></i>
+                        <p style="color: #64748b;">No ranks achieved yet. Keep growing your team!</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

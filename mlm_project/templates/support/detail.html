@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Ticket #{{ ticket.id }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h4><i class="bi bi-ticket"></i> Ticket #{{ ticket.id }}</h4>
+    <p>View ticket details</p>
+</div>
+
+<div class="glass-card mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="text-white fw-bold mb-0">{{ ticket.subject }}</h5>
+        {% if ticket.status == 'open' %}
+        <span class="badge-glass" style="background: rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.4);">OPEN</span>
+        {% else %}
+        <span class="badge-glass" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4);">CLOSED</span>
+        {% endif %}
+    </div>
+    <p class="text-white-50 small mb-3">Submitted on {{ ticket.created_at|date:"d M Y H:i" }}</p>
+    <p class="text-white">{{ ticket.message }}</p>
+</div>
+
+{% if ticket.admin_reply %}
+<div class="glass-card" style="border-left: 4px solid rgba(16, 185, 129, 0.5);">
+    <h6 class="fw-bold text-white mb-3"><i class="bi bi-reply-fill me-2"></i>Admin Reply</h6>
+    <p class="text-white mb-0">{{ ticket.admin_reply }}</p>
+</div>
+{% endif %}
+
+<a href="{% url 'support_list' %}" class="btn btn-glass mt-3">
+    <i class="bi bi-arrow-left me-1"></i>Back to Tickets
+</a>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% load mlm_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Income Report - {{ user.username }}</title>
+<style>
+body { font-family: Arial, sans-serif; font-size: 12px; color: #333; }
+h1 { color: #0d6efd; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+th { background: #0d6efd; color: white; padding: 6px 8px; text-align: left; }
+td { padding: 5px 8px; border-bottom: 1px solid #eee; }
+.section { margin-bottom: 30px; }
+.stat { display: inline-block; margin: 5px 10px; padding: 8px 15px; background: #f0f2f5; border-radius: 6px; }
+</style>
+</head>
+<body>
+<h1>MLM Network — Income Report</h1>
+<p>Generated for: <strong>{{ user.username }}</strong> (ID: {{ user.id }}) | Date: {% now "d M Y" %}</p>
+
+<div class="section">
+    <h3>Summary</h3>
+    <div class="stat">Total Income: ₹{{ total_income|floatformat:2 }}</div>
+    <div class="stat">Direct Team: {{ direct_count }}</div>
+    <div class="stat">Total Team: {{ total_team }}</div>
+    <div class="stat">Team Business: ₹{{ team_business|floatformat:2 }}</div>
+    <div class="stat">Rank: {{ rank }}</div>
+    <div class="stat">Joining Date: {{ user.joining_date }}</div>
+</div>
+
+<div class="section">
+    <h3>Wallet Balances</h3>
+    <table>
+        <thead><tr><th>Wallet</th><th>Balance</th></tr></thead>
+        <tbody>
+            {% for key, label in wallet_choices %}
+            <tr><td>{{ label }}</td><td>₹{{ balances|get_item:key|floatformat:2 }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <h3>Recent Transactions (Last 50)</h3>
+    <table>
+        <thead><tr><th>Date</th><th>Wallet</th><th>Type</th><th>Amount</th><th>Description</th></tr></thead>
+        <tbody>
+            {% for txn in txns %}
+            <tr>
+                <td>{{ txn.created_at|date:"d M Y H:i" }}</td>
+                <td>{{ txn.get_wallet_type_display }}</td>
+                <td>{{ txn.txn_type|upper }}</td>
+                <td>{% if txn.txn_type == 'credit' %}+{% else %}-{% endif %}₹{{ txn.amount|floatformat:2 }}</td>
+                <td>{{ txn.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

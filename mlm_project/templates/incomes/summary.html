@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load mlm_tags %}
+{% block title %}Income Summary{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h4><i class="bi bi-cash-stack"></i> Income Summary</h4>
+    <p>Track all your earnings</p>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-12">
+        <div class="stat-card">
+            <i class="bi bi-cash-stack icon"></i>
+            <div class="value">₹{{ total|floatformat:2 }}</div>
+            <div class="label">Total Income Earned</div>
+        </div>
+    </div>
+</div>
+
+<div class="card-modern mb-4">
+    <h5 class="fw-bold mb-4" style="color: #1e293b;"><i class="bi bi-wallet2 me-2" style="color: #3b82f6;"></i>Income Breakdown</h5>
+    <div class="wallet-grid">
+        {% for key, label in income_wallets %}
+        <div class="wallet-item">
+            <div class="mb-2">
+                <i class="bi bi-cash fs-3" style="color: #3b82f6;"></i>
+            </div>
+            <div class="wallet-label">{{ label }}</div>
+            <div class="wallet-value">₹{{ balances|get_item:key|floatformat:2 }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="card-modern">
+    <h5 class="fw-bold mb-4" style="color: #1e293b;"><i class="bi bi-clock-history me-2" style="color: #3b82f6;"></i>Recent Income Transactions</h5>
+    <div class="table-modern">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Wallet</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for txn in recent_txns %}
+                <tr>
+                    <td>{{ txn.created_at|date:"d M Y H:i" }}</td>
+                    <td><span class="badge-glass">{{ txn.get_wallet_type_display }}</span></td>
+                    <td class="fw-bold">+₹{{ txn.amount|floatformat:2 }}</td>
+                    <td>{{ txn.description }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center py-5">
+                        <i class="bi bi-inbox fs-1 d-block mb-3" style="color: #94a3b8;"></i>
+                        <p style="color: #64748b;">No income transactions yet.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #667eea 100%) !important;
+    background-size: 400% 400% !important;
+    animation: gradientShift 15s ease infinite !important;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Glow Animation */
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 80px rgba(59, 130, 246, 0.4); }
+}
+
+/* Network Lines Animation */
+@keyframes drawLine {
+    0% { stroke-dashoffset: 1000; }
+    100% { stroke-dashoffset: 0; }
+}
+
+/* Rotate Animation */
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.login-container {
+    position: relative;
+    z-index: 10;
+}
+
+.logo-container {
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+}
+
+.logo-icon {
+    font-size: 5rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: glow 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+}
+
+.logo-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border: 3px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.logo-circle-outer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border: 2px dashed rgba(139, 92, 246, 0.3);
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+}
+
+.network-dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.network-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(59, 130, 246, 0.6);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.network-dot:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.network-dot:nth-child(2) { top: 30%; right: 15%; animation-delay: 0.5s; }
+.network-dot:nth-child(3) { bottom: 25%; left: 20%; animation-delay: 1s; }
+.network-dot:nth-child(4) { bottom: 30%; right: 10%; animation-delay: 1.5s; }
+.network-dot:nth-child(5) { top: 50%; left: 5%; animation-delay: 2s; }
+.network-dot:nth-child(6) { top: 60%; right: 8%; animation-delay: 2.5s; }
+
+.login-card {
+    animation: fadeInUp 0.8s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+    animation: rotate 15s linear infinite;
+}
+
+.form-control-modern:focus {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.btn-primary-modern {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary-modern::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary-modern:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.welcome-text {
+    background: linear-gradient(135deg, #1e293b, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<div class="network-dots">
+    <div class="network-dot"></div>
+    <div class="network-dot"></div>
+    <div class="network-dot"></div>
+    <div class="network-dot"></div>
+    <div class="network-dot"></div>
+    <div class="network-dot"></div>
+</div>
+
+<div class="min-vh-100 d-flex align-items-center justify-content-center login-container">
+    <div class="card-modern login-card" style="width:450px; max-width:95%; position: relative;">
+        <div class="text-center mb-4">
+            <div class="mb-4 logo-container">
+                <div class="logo-circle-outer"></div>
+                <div class="logo-circle"></div>
+                <i class="bi bi-diagram-3-fill logo-icon" style="position: relative; z-index: 5;"></i>
+            </div>
+            <h3 class="fw-bold welcome-text mb-2">Welcome Back!</h3>
+            <p class="text-muted">Login to your <span class="fw-bold" style="color: #3b82f6;">MLM Network</span> account</p>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="mb-2" style="color: #1e293b; font-weight: 500;">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text" style="background: #f8fafc; border: 1px solid #e5e7eb;"><i class="bi bi-person" style="color: #64748b;"></i></span>
+                    <input type="text" name="username" class="form-control form-control-modern" placeholder="Enter username" required>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="mb-2" style="color: #1e293b; font-weight: 500;">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text" style="background: #f8fafc; border: 1px solid #e5e7eb;"><i class="bi bi-lock" style="color: #64748b;"></i></span>
+                    <input type="password" name="password" class="form-control form-control-modern" placeholder="Enter password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary-modern w-100 py-3 fw-bold" style="position: relative; z-index: 1;">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Login to Dashboard
+            </button>
+        </form>
+        
+        <div class="text-center mt-4">
+            <p class="text-muted mb-0">Don't have an account?</p>
+            <a href="{% url 'register' %}" class="fw-bold text-decoration-none" style="color: #3b82f6;">
+                Create Account <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

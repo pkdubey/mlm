@@ -1,0 +1,403 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - MLM Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #00C897;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            padding-top: 80px;
+        }
+        
+        /* Navbar */
+        .navbar-custom {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            color: #fff !important;
+            margin: 0 15px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+        
+        .policy-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+        
+        .policy-content {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            margin: -30px auto 50px;
+            max-width: 900px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .policy-section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .policy-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .policy-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .policy-section ul li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+        }
+        
+        .policy-section ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .last-updated {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+        
+        /* Footer */
+        .footer-section { 
+            background: linear-gradient(180deg, #0f172a 0%, #000000 100%);
+            color: white; 
+            padding: 80px 0 30px;
+            margin-top: 50px;
+        }
+        
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { 
+            color: #94a3b8; 
+            text-decoration: none; 
+            transition: all 0.3s;
+        }
+        .footer-links a:hover { 
+            color: var(--primary); 
+            padding-left: 10px;
+        }
+        
+        .footer-contact { list-style: none; padding: 0; }
+        .footer-contact li { 
+            color: #94a3b8; 
+            margin-bottom: 18px;
+        }
+        .footer-contact i { 
+            color: var(--primary); 
+            margin-right: 12px;
+        }
+        
+        .social-links { display: flex; gap: 15px; }
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s;
+        }
+        .social-icon:hover { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-diagram-3"></i> MLM Network
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="background: white;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#wallets">Wallets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#ranks">Ranks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/auth/login/">Login</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white px-4" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 50px;" href="/auth/register/">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="policy-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3"><i class="bi bi-shield-lock"></i> Privacy Policy</h1>
+            <p class="lead">Your privacy is important to us</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="policy-content">
+            <div class="last-updated">
+                <strong><i class="bi bi-calendar-check"></i> Last Updated:</strong> January 2025
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-info-circle"></i> Introduction</h3>
+                <p>Welcome to MLM Network. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our platform and tell you about your privacy rights.</p>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-collection"></i> Information We Collect</h3>
+                <p>We collect and process the following types of information:</p>
+                <ul>
+                    <li><strong>Personal Information:</strong> Name, email address, phone number, date of birth</li>
+                    <li><strong>Account Information:</strong> Username, password (encrypted), referral code</li>
+                    <li><strong>Financial Information:</strong> Wallet balances, transaction history, payment details</li>
+                    <li><strong>Team Information:</strong> Genealogy data, referral relationships, team performance</li>
+                    <li><strong>Technical Data:</strong> IP address, browser type, device information, login timestamps</li>
+                    <li><strong>Usage Data:</strong> Pages visited, features used, time spent on platform</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-gear"></i> How We Use Your Information</h3>
+                <p>We use your personal data for the following purposes:</p>
+                <ul>
+                    <li>To create and manage your account</li>
+                    <li>To process transactions and manage wallets</li>
+                    <li>To calculate and distribute commissions</li>
+                    <li>To provide customer support and respond to inquiries</li>
+                    <li>To send important notifications and updates</li>
+                    <li>To improve our platform and user experience</li>
+                    <li>To prevent fraud and ensure platform security</li>
+                    <li>To comply with legal obligations</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-shield-check"></i> Data Security</h3>
+                <p>We implement appropriate security measures to protect your personal data:</p>
+                <ul>
+                    <li>Password encryption using industry-standard algorithms</li>
+                    <li>Secure HTTPS connections for all data transmission</li>
+                    <li>Regular security audits and vulnerability assessments</li>
+                    <li>Access controls and authentication mechanisms</li>
+                    <li>Encrypted database storage for sensitive information</li>
+                    <li>Regular backups to prevent data loss</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-share"></i> Data Sharing</h3>
+                <p>We do not sell your personal data. We may share your information only in the following circumstances:</p>
+                <ul>
+                    <li><strong>With Your Team:</strong> Your upline and downline can see basic profile information</li>
+                    <li><strong>Service Providers:</strong> Payment processors, email services (under strict confidentiality)</li>
+                    <li><strong>Legal Requirements:</strong> When required by law or to protect our rights</li>
+                    <li><strong>Business Transfers:</strong> In case of merger, acquisition, or asset sale</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-person-check"></i> Your Rights</h3>
+                <p>You have the following rights regarding your personal data:</p>
+                <ul>
+                    <li><strong>Access:</strong> Request a copy of your personal data</li>
+                    <li><strong>Correction:</strong> Update or correct inaccurate information</li>
+                    <li><strong>Deletion:</strong> Request deletion of your account and data</li>
+                    <li><strong>Portability:</strong> Receive your data in a structured format</li>
+                    <li><strong>Objection:</strong> Object to certain data processing activities</li>
+                    <li><strong>Withdrawal:</strong> Withdraw consent for data processing</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-cookie"></i> Cookies</h3>
+                <p>We use cookies and similar technologies to enhance your experience. Cookies help us:</p>
+                <ul>
+                    <li>Keep you logged in during your session</li>
+                    <li>Remember your preferences and settings</li>
+                    <li>Analyze platform usage and performance</li>
+                    <li>Provide personalized content and features</li>
+                </ul>
+                <p>You can control cookies through your browser settings.</p>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-clock-history"></i> Data Retention</h3>
+                <p>We retain your personal data for as long as necessary to:</p>
+                <ul>
+                    <li>Provide our services to you</li>
+                    <li>Comply with legal and regulatory requirements</li>
+                    <li>Resolve disputes and enforce agreements</li>
+                    <li>Maintain accurate financial records</li>
+                </ul>
+                <p>After account closure, we may retain certain data for legal and audit purposes.</p>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-people"></i> Children's Privacy</h3>
+                <p>Our platform is not intended for users under 18 years of age. We do not knowingly collect personal data from children. If you believe we have collected data from a child, please contact us immediately.</p>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-arrow-repeat"></i> Changes to This Policy</h3>
+                <p>We may update this privacy policy from time to time. We will notify you of any significant changes by:</p>
+                <ul>
+                    <li>Posting the new policy on this page</li>
+                    <li>Updating the "Last Updated" date</li>
+                    <li>Sending email notifications for major changes</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h3><i class="bi bi-envelope"></i> Contact Us</h3>
+                <p>If you have any questions about this privacy policy or our data practices, please contact us:</p>
+                <ul>
+                    <li><strong>Email:</strong> privacy@mlmnetwork.com</li>
+                    <li><strong>Phone:</strong> +91-9359533987</li>
+                    <li><strong>Address:</strong> New Delhi, India</li>
+                    <li><strong>Support:</strong> <a href="/support/contact/">Contact Form</a></li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle"></i> <strong>Note:</strong> By using our platform, you acknowledge that you have read and understood this privacy policy and agree to its terms.
+            </div>
+        </div>
+    </div>
+
+    <a href="/" class="back-btn" title="Back to Home">
+        <i class="bi bi-house"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="mb-4"><i class="bi bi-diagram-3"></i> MLM Network</h4>
+                    <p class="text-light">Professional Network Marketing Platform with advanced features for team management and income distribution.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#features">Features</a></li>
+                        <li><a href="/#wallets">Wallets</a></li>
+                        <li><a href="/#ranks">Ranks</a></li>
+                        <li><a href="/auth/register/">Register</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="/support/help/">Help Center</a></li>
+                        <li><a href="/support/privacy/">Privacy Policy</a></li>
+                        <li><a href="/support/terms/">Terms of Service</a></li>
+                        <li><a href="/support/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="mb-4">Contact Info</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-envelope"></i> support@mlmnetwork.com</li>
+                        <li><i class="bi bi-phone"></i> +91-9359533987</li>
+                        <li><i class="bi bi-geo-alt"></i> New Delhi, India</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 40px 0 20px;">
+            
+            <div class="text-center">
+                <p class="mb-0">&copy; 2026 MLM Network. All Rights Reserved. Made with <i class="bi bi-heart-fill text-danger"></i> for MLM Community</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

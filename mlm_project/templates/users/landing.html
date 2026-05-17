@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLM Network - Build Your Financial Freedom</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #00C897;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+            --warning: #FBBF24;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: var(--dark);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+        
+        /* Navbar */
+        .navbar-custom {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(15, 23, 42, 1);
+            box-shadow: 0 8px 40px rgba(108, 99, 255, 0.4);
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: 0.3s;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-link {
+            color: #fff !important;
+            margin: 0 15px;
+            transition: all 0.3s;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated Grid Background */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(108, 99, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108, 99, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Glowing Orbs */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.3), transparent 70%);
+            top: -300px;
+            right: -300px;
+            border-radius: 50%;
+            animation: orbPulse 8s ease-in-out infinite;
+            filter: blur(60px);
+        }
+        
+        @keyframes orbPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+        }
+        
+        .hero-orb-2 {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 200, 151, 0.3), transparent 70%);
+            bottom: -200px;
+            left: -200px;
+            border-radius: 50%;
+            animation: orbPulse 10s ease-in-out infinite reverse;
+            filter: blur(60px);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            display: inline-block;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(108, 99, 255, 0.5);
+            animation: slideInDown 0.8s ease-out, badgePulse 3s ease-in-out infinite 1s;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 8px 30px rgba(108, 99, 255, 0.5); }
+            50% { box-shadow: 0 8px 40px rgba(108, 99, 255, 0.8), 0 0 60px rgba(108, 99, 255, 0.4); }
+        }
+        
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--warning));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            background-size: 200% 200%;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            animation: underlineGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes underlineGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(108, 99, 255, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(108, 99, 255, 1), 0 0 40px rgba(0, 200, 151, 0.5); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        
+        .btn-hero {
+            padding: 16px 45px;
+            font-size: 1.15rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary-custom:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(108, 99, 255, 0.6), 0 0 60px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn-outline-custom {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--dark);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        .stats-box {
+            text-align: center;
+            padding: 25px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease-out 0.8s both;
+            height: 100%;
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(108, 99, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+        
+        .stats-box:hover::before {
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .stats-box:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px) scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(108, 99, 255, 0.4), 0 0 40px rgba(108, 99, 255, 0.2);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--warning), #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        
+        .stats-label {
+            color: #cbd5e1;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .hero-image {
+            position: relative;
+            z-index: 2;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 20px 60px rgba(108, 99, 255, 0.4));
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-25px); }
+        }
+        
+        /* Particles effect */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite;
+        }
+        
+        @keyframes particleFloat {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        /* Section Titles Enhancement */
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .section-title.light {
+            color: white;
+        }
+        
+        .section-subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 25px;
+            padding: 45px 35px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            height: 100%;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.05), rgba(0, 200, 151, 0.05));
+            opacity: 0;
+            transition: 0.5s;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(108, 99, 255, 0.25);
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.5rem;
+            color: white;
+            transition: all 0.5s;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotateY(360deg) scale(1.1);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.5);
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .feature-desc {
+            color: #64748b;
+            line-height: 1.6;
+        }
+        
+        /* Wallet Section Enhancement */
+        .wallet-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wallet-section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(108, 99, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: dotMove 20s linear infinite;
+        }
+        
+        @keyframes dotMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+        
+        .wallet-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wallet-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(108, 99, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: 0.6s;
+        }
+        
+        .wallet-box:hover::before {
+            animation: shimmer 1.5s infinite;
+        }
+        
+        .wallet-box:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(108, 99, 255, 0.5);
+        }
+        
+        .wallet-icon {
+            font-size: 3.5rem;
+            color: var(--warning);
+            margin-bottom: 20px;
+            transition: 0.5s;
+            filter: drop-shadow(0 5px 15px rgba(251, 191, 36, 0.5));
+        }
+        
+        .wallet-box:hover .wallet-icon {
+            transform: scale(1.2) rotateY(360deg);
+            filter: drop-shadow(0 10px 30px rgba(251, 191, 36, 0.8));
+        }
+        
+        .wallet-name {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .wallet-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+        
+        /* Rank Section Enhancement */
+        .rank-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, white 0%, #F8FAFC 100%);
+            position: relative;
+        }
+        
+        .rank-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, rgba(108, 99, 255, 0.05), transparent);
+        }
+        
+        .rank-card {
+            background: white;
+            border-radius: 30px;
+            padding: 50px 35px;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            border: 3px solid transparent;
+        }
+        
+        .rank-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+        
+        .rank-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.1), transparent);
+            border-radius: 50%;
+            transition: 0.6s;
+        }
+        
+        .rank-card:hover::after {
+            width: 400px;
+            height: 400px;
+        }
+        
+        .rank-card.silver::before { background: linear-gradient(90deg, #C0C0C0, #E8E8E8, #C0C0C0); }
+        .rank-card.gold::before { background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700); }
+        .rank-card.diamond::before { background: linear-gradient(90deg, #00D4FF, #0099FF, #00D4FF); }
+        .rank-card.crown::before { background: linear-gradient(90deg, #FF6B6B, #FFD93D, #FF6B6B); }
+        
+        .rank-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(108, 99, 255, 0.4);
+        }
+        
+        .rank-card.silver:hover { border-color: #C0C0C0; }
+        .rank-card.gold:hover { border-color: #FFD700; }
+        .rank-card.diamond:hover { border-color: #00D4FF; }
+        .rank-card.crown:hover { border-color: #FF6B6B; }
+        
+        .rank-icon { 
+            font-size: 5rem; 
+            margin-bottom: 25px;
+            transition: 0.6s;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+        
+        .rank-card:hover .rank-icon {
+            transform: scale(1.2) rotateY(360deg);
+        }
+        
+        .rank-card.silver .rank-icon { color: #C0C0C0; }
+        .rank-card.gold .rank-icon { color: #FFD700; }
+        .rank-card.diamond .rank-icon { color: #00D4FF; }
+        .rank-card.crown .rank-icon { color: #FF6B6B; }
+        
+        .rank-title { 
+            font-size: 2.2rem; 
+            font-weight: 900; 
+            color: var(--dark); 
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .rank-requirement { 
+            color: #64748b; 
+            font-size: 1.05rem; 
+            margin-bottom: 25px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .rank-reward { 
+            font-size: 2rem; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Analytics Section */
+        .analytics-section { padding: 100px 0; background: var(--light); }
+        .analytics-image { border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        
+        @keyframes barGrow {
+            from { height: 0; opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Animated Moving Shapes in Background */
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatShape 20s infinite ease-in-out;
+        }
+        
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -100px) rotate(90deg); }
+            50% { transform: translate(200px, 50px) rotate(180deg); }
+            75% { transform: translate(-50px, 100px) rotate(270deg); }
+        }
+        
+        .shape-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .shape-square {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--secondary), var(--warning));
+            border-radius: 20px;
+        }
+        
+        .shape-triangle {
+            width: 0;
+            height: 0;
+            border-left: 75px solid transparent;
+            border-right: 75px solid transparent;
+            border-bottom: 130px solid var(--primary);
+            opacity: 0.1;
+        }
+        
+        /* Animated Lines */
+        .animated-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: lineMove 3s infinite;
+        }
+        
+        @keyframes lineMove {
+            0% { width: 0; left: 0; }
+            50% { width: 300px; }
+            100% { width: 0; left: 100%; }
+        }
+        .check-list { list-style: none; padding: 0; }
+        .check-list li { padding: 12px 0; font-size: 1.1rem; color: #475569; }
+        .check-list li i { color: var(--secondary); margin-right: 10px; font-size: 1.3rem; }
+        
+        /* CTA Section Enhancement */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -400px;
+            right: -300px;
+            animation: orbPulse 10s ease-in-out infinite;
+        }
+        
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -300px;
+            left: -200px;
+            animation: orbPulse 8s ease-in-out infinite reverse;
+        }
+        
+        .cta-title { 
+            font-size: 3.5rem; 
+            font-weight: 900; 
+            color: white; 
+            margin-bottom: 25px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-subtitle { 
+            font-size: 1.4rem; 
+            color: rgba(255, 255, 255, 0.95); 
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .btn-cta {
+            background: white;
+            color: var(--primary);
+            padding: 20px 60px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.4s;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-cta:hover { 
+            transform: scale(1.1) translateY(-5px); 
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, white, #f0f0f0);
+        }
+        
+        /* Testimonials Enhancement */
+        .testimonials-section { 
+            padding: 100px 0; 
+            background: linear-gradient(180deg, white 0%, #F8FAFC 100%);
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 8rem;
+            color: rgba(108, 99, 255, 0.05);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 70px rgba(108, 99, 255, 0.25);
+            border-color: var(--primary);
+        }
+        
+        .testimonial-text { 
+            color: #475569; 
+            font-size: 1.05rem; 
+            line-height: 1.8; 
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .avatar { 
+            font-size: 3.5rem; 
+            color: var(--primary);
+            transition: 0.5s;
+        }
+        
+        .testimonial-card:hover .avatar {
+            transform: scale(1.2) rotate(360deg);
+        }
+        
+        .stars i {
+            transition: 0.3s;
+        }
+        
+        .testimonial-card:hover .stars i {
+            transform: scale(1.2);
+        }
+        
+        /* FAQ Enhancement */
+        .faq-section { 
+            padding: 100px 0; 
+            background: linear-gradient(180deg, #F8FAFC 0%, white 100%);
+        }
+        
+        .accordion-item {
+            border: none;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+        
+        .accordion-item:hover {
+            box-shadow: 0 10px 40px rgba(108, 99, 255, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .accordion-button {
+            background: white;
+            color: var(--dark);
+            font-weight: 700;
+            padding: 25px 30px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+        
+        .accordion-button::after {
+            transition: 0.3s;
+        }
+        
+        .accordion-button:not(.collapsed)::after {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-body {
+            padding: 25px 30px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #475569;
+        }
+        
+        /* Footer Enhancement */
+        .footer-section { 
+            background: linear-gradient(180deg, #0f172a 0%, #000000 100%);
+            color: white; 
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+        }
+        
+        .footer-section h4,
+        .footer-section h5 {
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-section h4::after,
+        .footer-section h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { 
+            color: #94a3b8; 
+            text-decoration: none; 
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .footer-links a:hover { 
+            color: var(--primary); 
+            padding-left: 10px;
+            transform: translateX(5px);
+        }
+        
+        .footer-contact { list-style: none; padding: 0; }
+        .footer-contact li { 
+            color: #94a3b8; 
+            margin-bottom: 18px;
+            transition: 0.3s;
+        }
+        .footer-contact li:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        .footer-contact i { 
+            color: var(--primary); 
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .social-links { display: flex; gap: 15px; }
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        .social-icon:hover { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-5px) rotate(360deg);
+            border-color: transparent;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .cta-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .btn-hero { padding: 14px 30px; font-size: 1rem; }
+            .stats-number { font-size: 1.8rem; }
+            .stats-box { padding: 20px 10px; min-height: 100px; }
+            .stats-label { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="bi bi-diagram-3"></i> MLM Network
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                <li class="nav-item"><a class="nav-link" href="#wallets">Wallets</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ranks">Ranks</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                <li class="nav-item"><a class="nav-link" href="/auth/login/">Login</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-primary-custom text-white px-4" href="/auth/register/">Get Started</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <!-- Second Glowing Orb -->
+    <div class="hero-orb-2"></div>
+    
+    <!-- Animated Floating Shapes -->
+    <div class="floating-shape shape-circle" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="floating-shape shape-square" style="top: 60%; right: 10%; animation-delay: 5s;"></div>
+    <div class="floating-shape shape-circle" style="bottom: 20%; left: 15%; animation-delay: 10s; width: 100px; height: 100px;"></div>
+    <div class="floating-shape shape-square" style="top: 30%; right: 20%; animation-delay: 7s; width: 80px; height: 80px;"></div>
+    
+    <!-- Animated Lines -->
+    <div class="animated-line" style="top: 20%; animation-delay: 0s;"></div>
+    <div class="animated-line" style="top: 50%; animation-delay: 1s;"></div>
+    <div class="animated-line" style="top: 80%; animation-delay: 2s;"></div>
+    
+    <!-- Particles Background -->
+    <div class="particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+    </div>
+    
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 hero-content">
+                <div class="hero-badge">
+                    <i class="bi bi-rocket-takeoff"></i> Professional MLM Platform
+                </div>
+                
+                <h1 class="hero-title">
+                    {% if content %}{{ content.hero_title }}{% else %}Build Your <span class="highlight">Network</span>.<br>Grow Your <span class="highlight">Income</span>.{% endif %}
+                </h1>
+                
+                <p class="hero-subtitle">
+                    {% if content %}{{ content.hero_subtitle }}{% else %}Powerful MLM Network Marketing Platform with Smart Wallets, Real-time Analytics, Team Management, and Automated Income Distribution.{% endif %}
+                </p>
+                
+                <div class="d-flex gap-3 mb-5 flex-wrap">
+                    <a href="/auth/register/" class="btn btn-hero btn-primary-custom">
+                        <i class="bi bi-person-plus"></i> Get Started Free
+                    </a>
+                    <a href="/auth/login/" class="btn btn-hero btn-outline-custom">
+                        <i class="bi bi-box-arrow-in-right"></i> Login
+                    </a>
+                </div>
+                
+                <div class="row mt-5 g-3">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="stats-box">
+                            <div class="stats-number">{% if content %}{{ content.total_members|default:"50K+" }}{% else %}50K+{% endif %}</div>
+                            <div class="stats-label">Active Users</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="stats-box">
+                            <div class="stats-number">{% if content %}{{ content.total_earnings|default:"₹10Cr+" }}{% else %}₹10Cr+{% endif %}</div>
+                            <div class="stats-label">Payout Distributed</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="stats-box">
+                            <div class="stats-number">{% if content %}{{ content.success_rate|default:"99.9%" }}{% else %}99.9%{% endif %}</div>
+                            <div class="stats-label">Uptime</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                <div class="position-relative">
+                    <div class="hero-image-container" style="background: linear-gradient(135deg, #6C63FF, #00C897); padding: 40px; border-radius: 25px; box-shadow: 0 20px 60px rgba(108, 99, 255, 0.4);">
+                        <div style="background: white; padding: 30px; border-radius: 20px;">
+                            <div style="text-align: center;">
+                                <i class="bi bi-graph-up-arrow" style="font-size: 5rem; color: #6C63FF; margin-bottom: 20px;"></i>
+                                <h3 style="color: #0F172A; font-weight: 700; margin-bottom: 15px;">MLM Dashboard</h3>
+                                <div class="row g-3 mt-3">
+                                    <div class="col-6">
+                                        <div style="background: #F8FAFC; padding: 15px; border-radius: 10px;">
+                                            <i class="bi bi-wallet2" style="font-size: 2rem; color: #6C63FF;"></i>
+                                            <p style="margin: 10px 0 0 0; color: #64748b; font-size: 0.9rem;">11 Wallets</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div style="background: #F8FAFC; padding: 15px; border-radius: 10px;">
+                                            <i class="bi bi-people" style="font-size: 2rem; color: #00C897;"></i>
+                                            <p style="margin: 10px 0 0 0; color: #64748b; font-size: 0.9rem;">Team Tree</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div style="background: #F8FAFC; padding: 15px; border-radius: 10px;">
+                                            <i class="bi bi-cash-stack" style="font-size: 2rem; color: #FBBF24;"></i>
+                                            <p style="margin: 10px 0 0 0; color: #64748b; font-size: 0.9rem;">9 Incomes</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div style="background: #F8FAFC; padding: 15px; border-radius: 10px;">
+                                            <i class="bi bi-trophy" style="font-size: 2rem; color: #FF6B6B;"></i>
+                                            <p style="margin: 10px 0 0 0; color: #64748b; font-size: 0.9rem;">4 Ranks</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Elements -->
+                    <div style="position: absolute; top: 10%; right: -5%; animation: float 2s ease-in-out infinite;">
+                        <div style="background: linear-gradient(135deg, #6C63FF, #00C897); padding: 15px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);">
+                            <i class="bi bi-graph-up-arrow" style="font-size: 2rem; color: white;"></i>
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 15%; left: -5%; animation: float 3s ease-in-out infinite;">
+                        <div style="background: linear-gradient(135deg, #00C897, #6C63FF); padding: 15px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 200, 151, 0.4);">
+                            <i class="bi bi-wallet2" style="font-size: 2rem; color: white;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section" id="features">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-title">Powerful MLM Features</h2>
+            <p class="section-subtitle">Everything you need to run a professional MLM business</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </div>
+                    <h4 class="feature-title">11 Smart Wallets</h4>
+                    <p class="feature-desc">Manage Income, Booster, Reward, Trading, Salary, Growth & more with advanced wallet system.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-diagram-3"></i>
+                    </div>
+                    <h4 class="feature-title">Genealogy Tree</h4>
+                    <p class="feature-desc">Interactive downline visualization with level-wise analytics and team management.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-bar-chart"></i>
+                    </div>
+                    <h4 class="feature-title">Real-time Analytics</h4>
+                    <p class="feature-desc">Live income charts, team reports, and performance tracking dashboard.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+                    <h4 class="feature-title">9 Income Streams</h4>
+                    <p class="feature-desc">Direct, Level 1-10, Binary, Matching, Reward, and Rank Achievement income.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h4 class="feature-title">Secure & Safe</h4>
+                    <p class="feature-desc">Bank-level security with encryption, CSRF protection, and secure transactions.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-lightning"></i>
+                    </div>
+                    <h4 class="feature-title">Instant Payouts</h4>
+                    <p class="feature-desc">Fast withdrawal processing with multiple payment methods and tracking.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Wallet Section -->
+<section class="wallet-section" id="wallets">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title light">Advanced Wallet Management</h2>
+            <p class="section-subtitle text-light">Manage multiple income streams with our smart wallet system</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="wallet-box">
+                    <div class="wallet-icon"><i class="bi bi-wallet"></i></div>
+                    <h5 class="wallet-name">Income Wallet</h5>
+                    <p class="wallet-desc">Main earnings wallet</p>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="wallet-box">
+                    <div class="wallet-icon"><i class="bi bi-rocket"></i></div>
+                    <h5 class="wallet-name">Booster Wallet</h5>
+                    <p class="wallet-desc">Performance bonuses</p>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="wallet-box">
+                    <div class="wallet-icon"><i class="bi bi-star"></i></div>
+                    <h5 class="wallet-name">Star Wallet</h5>
+                    <p class="wallet-desc">Achievement rewards</p>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="wallet-box">
+                    <div class="wallet-icon"><i class="bi bi-gift"></i></div>
+                    <h5 class="wallet-name">Reward Wallet</h5>
+                    <p class="wallet-desc">Special incentives</p>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="wallet-box">
+                    <div class="wallet-icon"><i class="bi bi-graph-up"></i></div>
+                    <h5 class="wallet-name">Trading Level</h5>
+                    <p class="wallet-desc">Trading income</p>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="wallet-box">
+                    <div class="wallet-icon"><i class="bi bi-cash-coin"></i></div>
+                    <h5 class="wallet-name">Salary Wallet</h5>
+                    <p class="wallet-desc">Monthly salary</p>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="wallet-box">
+                    <div class="wallet-icon"><i class="bi bi-currency-dollar"></i></div>
+                    <h5 class="wallet-name">USDT Wallet</h5>
+                    <p class="wallet-desc">Crypto earnings</p>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="wallet-box">
+                    <div class="wallet-icon"><i class="bi bi-arrow-up-circle"></i></div>
+                    <h5 class="wallet-name">Topup Wallet</h5>
+                    <p class="wallet-desc">Investment funds</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Rank Section -->
+<section class="rank-section" id="ranks">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Leadership Rank System</h2>
+            <p class="section-subtitle">Achieve higher ranks and unlock exclusive rewards</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="rank-card silver">
+                    <div class="rank-icon"><i class="bi bi-award"></i></div>
+                    <h3 class="rank-title">Silver</h3>
+                    <p class="rank-requirement">10+ Team Members<br>₹50,000+ Business</p>
+                    <div class="rank-reward">₹5,000 Reward</div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="rank-card gold">
+                    <div class="rank-icon"><i class="bi bi-trophy"></i></div>
+                    <h3 class="rank-title">Gold</h3>
+                    <p class="rank-requirement">25+ Team Members<br>₹1,50,000+ Business</p>
+                    <div class="rank-reward">₹15,000 Reward</div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="rank-card diamond">
+                    <div class="rank-icon"><i class="bi bi-gem"></i></div>
+                    <h3 class="rank-title">Diamond</h3>
+                    <p class="rank-requirement">50+ Team Members<br>₹5,00,000+ Business</p>
+                    <div class="rank-reward">₹50,000 Reward</div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6">
+                <div class="rank-card crown">
+                    <div class="rank-icon"><i class="bi bi-crown"></i></div>
+                    <h3 class="rank-title">Crown</h3>
+                    <p class="rank-requirement">100+ Team Members<br>₹10,00,000+ Business</p>
+                    <div class="rank-reward">₹1,00,000 Reward</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Analytics Section -->
+<section class="analytics-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="analytics-mockup" style="background: linear-gradient(135deg, #6C63FF, #00C897); padding: 30px; border-radius: 25px; box-shadow: 0 20px 60px rgba(108, 99, 255, 0.3);">
+                    <div style="background: white; padding: 25px; border-radius: 20px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 style="color: #0F172A; font-weight: 700; margin: 0;">Income Analytics</h5>
+                            <i class="bi bi-graph-up" style="font-size: 1.5rem; color: #6C63FF;"></i>
+                        </div>
+                        
+                        <!-- Chart Bars -->
+                        <div class="chart-container" style="display: flex; align-items: flex-end; gap: 10px; height: 150px; margin: 20px 0;">
+                            <div style="flex: 1; background: linear-gradient(180deg, #6C63FF, #8B7FFF); border-radius: 8px 8px 0 0; height: 60%; animation: barGrow 1s ease-out;"></div>
+                            <div style="flex: 1; background: linear-gradient(180deg, #00C897, #33D9B0); border-radius: 8px 8px 0 0; height: 85%; animation: barGrow 1s ease-out 0.2s both;"></div>
+                            <div style="flex: 1; background: linear-gradient(180deg, #FBBF24, #FCD34D); border-radius: 8px 8px 0 0; height: 70%; animation: barGrow 1s ease-out 0.4s both;"></div>
+                            <div style="flex: 1; background: linear-gradient(180deg, #6C63FF, #8B7FFF); border-radius: 8px 8px 0 0; height: 95%; animation: barGrow 1s ease-out 0.6s both;"></div>
+                            <div style="flex: 1; background: linear-gradient(180deg, #00C897, #33D9B0); border-radius: 8px 8px 0 0; height: 80%; animation: barGrow 1s ease-out 0.8s both;"></div>
+                        </div>
+                        
+                        <!-- Stats Grid -->
+                        <div class="row g-2 mt-3">
+                            <div class="col-6">
+                                <div style="background: #F8FAFC; padding: 15px; border-radius: 10px; text-align: center;">
+                                    <i class="bi bi-arrow-up-circle" style="font-size: 1.5rem; color: #00C897;"></i>
+                                    <p style="margin: 5px 0 0 0; color: #64748b; font-size: 0.85rem; font-weight: 600;">+45% Growth</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div style="background: #F8FAFC; padding: 15px; border-radius: 10px; text-align: center;">
+                                    <i class="bi bi-people" style="font-size: 1.5rem; color: #6C63FF;"></i>
+                                    <p style="margin: 5px 0 0 0; color: #64748b; font-size: 0.85rem; font-weight: 600;">1,234 Users</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <h2 class="section-title">Real-time Business Analytics</h2>
+                <p class="section-subtitle">Track team growth, commissions, wallet balances, payouts, and performance with beautiful charts.</p>
+                
+                <ul class="check-list mt-4">
+                    <li><i class="bi bi-check-circle-fill"></i> Daily Income Reports</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Team Growth Metrics</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Rank Achievement Reports</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Withdrawal Tracking</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Performance Dashboard</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Income Distribution Charts</li>
+                </ul>
+                
+                <a href="/auth/register/" class="btn btn-primary-custom btn-lg mt-4">
+                    <i class="bi bi-graph-up"></i> View Demo Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container position-relative" style="z-index: 2;">
+        <h2 class="cta-title">Start Growing Your Team Today</h2>
+        <p class="cta-subtitle">Join the next generation MLM platform with powerful automation and smart earnings.</p>
+        <a href="/auth/register/" class="btn btn-cta">
+            <i class="bi bi-rocket-takeoff"></i> Join Now - It's Free
+        </a>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section" id="testimonials">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">What Leaders Say</h2>
+            <p class="section-subtitle">Success stories from our top performers</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <div class="stars mb-3">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                    </div>
+                    <p class="testimonial-text">"This MLM system completely transformed our business management. The analytics and wallet system are outstanding!"</p>
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="mb-0">Rahul Sharma</h5>
+                            <small class="text-muted">Diamond Rank</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <div class="stars mb-3">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                    </div>
+                    <p class="testimonial-text">"Real-time income tracking and team analytics are amazing. I can manage my entire network from my phone!"</p>
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="mb-0">Priya Verma</h5>
+                            <small class="text-muted">Gold Rank</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <div class="stars mb-3">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                    </div>
+                    <p class="testimonial-text">"Very professional UI and powerful features. The genealogy tree view helps me understand my team structure perfectly."</p>
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="avatar">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="mb-0">Amit Singh</h5>
+                            <small class="text-muted">Crown Rank</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Got questions? We've got answers</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How does referral income work?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Users earn commissions from direct referrals (10%) and level-based team growth (Level 1-10). Income is automatically distributed to your wallet.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What are the different wallet types?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We have 11 wallet types: Income, Self Income, Booster, Star, Trading Level, Salary, Reward, Growth, Sponsor Growth, USDT, and Topup wallets.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                How do I withdraw my earnings?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Go to Fund Management > Withdraw, enter amount, select payment method, and submit. Withdrawals are processed within 24-48 hours.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                What is the rank system?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We have 4 ranks: Silver (10+ team), Gold (25+ team), Diamond (50+ team), and Crown (100+ team). Each rank comes with exclusive rewards.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                Is there any joining fee?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Registration is completely free. You can start building your team immediately after signing up.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <h4 class="mb-4"><i class="bi bi-diagram-3"></i> MLM Network</h4>
+                <p class="text-light">Professional Network Marketing Platform with advanced features for team management and income distribution.</p>
+                <div class="social-links mt-4">
+                    <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-2 col-md-6">
+                <h5 class="mb-4">Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#wallets">Wallets</a></li>
+                    <li><a href="#ranks">Ranks</a></li>
+                    <li><a href="/auth/register/">Register</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <h5 class="mb-4">Support</h5>
+                <ul class="footer-links">
+                    <li><a href="/support/help/">Help Center</a></li>
+                    <li><a href="/support/privacy/">Privacy Policy</a></li>
+                    <li><a href="/support/terms/">Terms of Service</a></li>
+                    <li><a href="/support/contact/">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <h5 class="mb-4">Contact Info</h5>
+                <ul class="footer-contact">
+                    <li><i class="bi bi-envelope"></i> {% if content %}{{ content.contact_email }}{% else %}support@mlmnetwork.com{% endif %}</li>
+                    <li><i class="bi bi-phone"></i> +91-9359533987</li>
+                    <li><i class="bi bi-geo-alt"></i> New Delhi, India</li>
+                </ul>
+            </div>
+        </div>
+        
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 40px 0 20px;">
+        
+        <div class="text-center">
+            <p class="mb-0">&copy; 2026 MLM Network. All Rights Reserved. Made with <i class="bi bi-heart-fill text-danger"></i> for MLM Community</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Navbar scroll effect
+const navbar = document.querySelector('.navbar-custom');
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+
+// Scroll reveal animation
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe all sections
+document.querySelectorAll('section').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(50px)';
+    section.style.transition = 'all 0.8s ease-out';
+    observer.observe(section);
+});
+
+// Hero section always visible
+document.querySelector('.hero-section').style.opacity = '1';
+document.querySelector('.hero-section').style.transform = 'translateY(0)';
+
+// Parallax effect for hero orbs
+window.addEventListener('scroll', function() {
+    const scrolled = window.pageYOffset;
+    const heroOrb2 = document.querySelector('.hero-orb-2');
+    if (heroOrb2) {
+        heroOrb2.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+});
+
+// Add cursor trail effect
+let cursorTrail = [];
+const trailLength = 10;
+
+document.addEventListener('mousemove', function(e) {
+    cursorTrail.push({x: e.clientX, y: e.clientY});
+    if (cursorTrail.length > trailLength) {
+        cursorTrail.shift();
+    }
+});
+</script>
+</body>
+</html>

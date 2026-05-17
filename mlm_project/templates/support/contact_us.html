@@ -1,0 +1,511 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - MLM Network</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --secondary: #00C897;
+            --success: #10b981;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        
+        /* Navbar */
+        .navbar-custom {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            color: #fff !important;
+            margin: 0 15px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+        
+        .contact-header {
+            padding: 80px 0 40px;
+            text-align: center;
+            color: white;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 0 15px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: slideUp 0.6s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-box::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -50px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .form-control, .form-select {
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .quick-link-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .quick-link-card:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .quick-link-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .quick-link-card:hover .quick-link-icon {
+            color: white;
+        }
+        
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            margin-top: 30px;
+        }
+        
+        .alert-custom {
+            border-radius: 12px;
+            border: none;
+            padding: 15px 20px;
+        }
+        
+        /* Footer */
+        .footer-section { 
+            background: linear-gradient(180deg, #0f172a 0%, #000000 100%);
+            color: white; 
+            padding: 80px 0 30px;
+            margin-top: 50px;
+        }
+        
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { 
+            color: #94a3b8; 
+            text-decoration: none; 
+            transition: all 0.3s;
+        }
+        .footer-links a:hover { 
+            color: var(--primary); 
+            padding-left: 10px;
+        }
+        
+        .footer-contact { list-style: none; padding: 0; }
+        .footer-contact li { 
+            color: #94a3b8; 
+            margin-bottom: 18px;
+        }
+        .footer-contact i { 
+            color: var(--primary); 
+            margin-right: 12px;
+        }
+        
+        .social-links { display: flex; gap: 15px; }
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.4s;
+        }
+        .social-icon:hover { 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-diagram-3"></i> MLM Network
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="background: white;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#wallets">Wallets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#ranks">Ranks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/auth/login/">Login</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white px-4" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; border-radius: 50px;" href="/auth/register/">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contact-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3"><i class="bi bi-envelope-heart"></i> Get In Touch</h1>
+            <p class="lead">We'd love to hear from you. Send us a message!</p>
+        </div>
+    </div>
+
+    <div class="contact-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-custom alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle"></i> {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="contact-card">
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <div class="info-box">
+                        <h3 class="mb-4">Contact Information</h3>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Address</h6>
+                                <p class="mb-0">New Delhi, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Phone</h6>
+                                <p class="mb-0">+91-9359533987</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Email</h6>
+                                <p class="mb-0">support@mlmnetwork.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Working Hours</h6>
+                                <p class="mb-0">24/7 Support Available</p>
+                            </div>
+                        </div>
+                        
+                        <h6 class="mt-4 mb-3">Follow Us</h6>
+                        <div class="social-links">
+                            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7">
+                    <h3 class="mb-4">Send Us a Message</h3>
+                    <form method="POST" id="contactForm">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Your Name *</label>
+                                <input type="text" class="form-control" name="name" required placeholder="John Doe">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" name="email" required placeholder="john@example.com">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Subject *</label>
+                                <select class="form-select" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="General Inquiry">General Inquiry</option>
+                                    <option value="Technical Support">Technical Support</option>
+                                    <option value="Account Issues">Account Issues</option>
+                                    <option value="Payment Issues">Payment Issues</option>
+                                    <option value="Partnership">Partnership Opportunity</option>
+                                    <option value="Feedback">Feedback</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Message *</label>
+                                <textarea class="form-control" name="message" rows="5" required placeholder="Tell us how we can help you..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn-submit">
+                                    <i class="bi bi-send"></i> Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-links">
+            <a href="/support/help/" class="quick-link-card">
+                <div class="quick-link-icon"><i class="bi bi-question-circle"></i></div>
+                <h5>Help Center</h5>
+                <p class="mb-0 small">Browse FAQs</p>
+            </a>
+            <a href="/support/create/" class="quick-link-card">
+                <div class="quick-link-icon"><i class="bi bi-ticket-detailed"></i></div>
+                <h5>Support Ticket</h5>
+                <p class="mb-0 small">Create Ticket</p>
+            </a>
+            <a href="/support/privacy/" class="quick-link-card">
+                <div class="quick-link-icon"><i class="bi bi-shield-lock"></i></div>
+                <h5>Privacy Policy</h5>
+                <p class="mb-0 small">Read Policy</p>
+            </a>
+            <a href="/support/terms/" class="quick-link-card">
+                <div class="quick-link-icon"><i class="bi bi-file-text"></i></div>
+                <h5>Terms of Service</h5>
+                <p class="mb-0 small">Read Terms</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="mb-4"><i class="bi bi-diagram-3"></i> MLM Network</h4>
+                    <p class="text-light">Professional Network Marketing Platform with advanced features for team management and income distribution.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#features">Features</a></li>
+                        <li><a href="/#wallets">Wallets</a></li>
+                        <li><a href="/#ranks">Ranks</a></li>
+                        <li><a href="/auth/register/">Register</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="mb-4">Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="/support/help/">Help Center</a></li>
+                        <li><a href="/support/privacy/">Privacy Policy</a></li>
+                        <li><a href="/support/terms/">Terms of Service</a></li>
+                        <li><a href="/support/contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="mb-4">Contact Info</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-envelope"></i> support@mlmnetwork.com</li>
+                        <li><i class="bi bi-phone"></i> +91-9359533987</li>
+                        <li><i class="bi bi-geo-alt"></i> New Delhi, India</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 40px 0 20px;">
+            
+            <div class="text-center">
+                <p class="mb-0">&copy; 2026 MLM Network. All Rights Reserved. Made with <i class="bi bi-heart-fill text-danger"></i> for MLM Community</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            const btn = this.querySelector('.btn-submit');
+            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Sending...';
+            btn.disabled = true;
+        });
+
+        // Add animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.quick-link-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

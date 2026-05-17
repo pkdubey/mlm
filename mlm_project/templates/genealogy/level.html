@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Level Team{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h4><i class="bi bi-layers"></i> Level Team</h4>
+    <p>View team members by level</p>
+</div>
+
+<div class="mb-4 text-center">
+    {% for l in range %}
+    <a href="?level={{ l }}" class="btn {% if level == l %}btn-primary-modern{% else %}btn-outline-modern{% endif %} btn-sm me-2 mb-2">
+        Level {{ l }}
+    </a>
+    {% endfor %}
+</div>
+
+<div class="card-modern mb-3">
+    <h5 style="color: #1e293b;" class="fw-bold">Level {{ level }} Members <span class="badge-modern badge-info">{{ team.count }}</span></h5>
+</div>
+
+<div class="table-modern">
+    <table class="table table-hover mb-0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Joining Date</th>
+                <th>Investment</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in team %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><strong><i class="bi bi-person-circle me-1"></i>{{ member.username }}</strong></td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.joining_date }}</td>
+                <td class="fw-bold">₹{{ member.investment|floatformat:2 }}</td>
+                <td>
+                    {% if member.is_active %}
+                    <span class="badge-modern badge-success">Active</span>
+                    {% else %}
+                    <span class="badge-modern" style="background: #e5e7eb; color: #64748b;">Inactive</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center py-5">
+                    <i class="bi bi-inbox fs-1 d-block mb-3" style="color: #94a3b8;"></i>
+                    <p style="color: #64748b;">No members at this level yet.</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

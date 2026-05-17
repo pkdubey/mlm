@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block title %}Genealogy Tree{% endblock %}
+
+{% block extra_css %}
+<style>
+.tree-container {
+    padding: 40px;
+    overflow-x: auto;
+}
+.tree ul {
+    padding-top: 30px;
+    position: relative;
+    transition: all 0.5s;
+}
+.tree li {
+    float: left;
+    text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 30px 10px 0 10px;
+    transition: all 0.5s;
+}
+.tree li::before, .tree li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 50%;
+    border-top: 2px solid rgba(59, 130, 246, 0.4);
+    width: 50%;
+    height: 30px;
+}
+.tree li::after {
+    right: auto;
+    left: 50%;
+    border-left: 2px solid rgba(59, 130, 246, 0.4);
+}
+.tree li:only-child::after, .tree li:only-child::before {
+    display: none;
+}
+.tree li:only-child {
+    padding-top: 0;
+}
+.tree li:first-child::before, .tree li:last-child::after {
+    border: 0 none;
+}
+.tree li:last-child::before {
+    border-right: 2px solid rgba(59, 130, 246, 0.4);
+    border-radius: 0 8px 0 0;
+}
+.tree li:first-child::after {
+    border-radius: 8px 0 0 0;
+}
+.tree ul ul::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-left: 2px solid rgba(59, 130, 246, 0.4);
+    width: 0;
+    height: 30px;
+}
+.tree li .node {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #1e293b;
+    font-size: 14px;
+    display: inline-block;
+    border-radius: 15px;
+    min-width: 120px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+.tree li .node::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    animation: rotate 15s linear infinite;
+}
+.tree li .node:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    border-color: rgba(59, 130, 246, 0.6);
+}
+.tree li .node i {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+    color: #3b82f6;
+}
+.tree li .node .fw-bold, .tree li .node small {
+    position: relative;
+    z-index: 1;
+}
+.tree li .node small {
+    color: #64748b !important;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h4><i class="bi bi-diagram-2"></i> Genealogy Tree</h4>
+    <p>Visual representation of your network</p>
+</div>
+
+<div class="card-modern">
+    <div class="tree-container">
+        <div class="tree" id="tree-container"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const treeData = {{ tree_data|safe }};
+
+function buildTree(node) {
+    if (!node) return '';
+    let html = '<li>';
+    html += `<div class="node">
+        <i class="bi bi-person-fill"></i>
+        <div class="fw-bold">${node.name}</div>
+        <small class="text-white-50">ID: ${node.id}</small>
+    </div>`;
+    if (node.children && node.children.length > 0) {
+        html += '<ul>';
+        node.children.forEach(child => {
+            html += buildTree(child);
+        });
+        html += '</ul>';
+    }
+    html += '</li>';
+    return html;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('tree-container').innerHTML = '<ul>' + buildTree(treeData) + '</ul>';
+});
+</script>
+{% endblock %}

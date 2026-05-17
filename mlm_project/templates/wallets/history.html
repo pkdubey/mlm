@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Transaction History{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h4><i class="bi bi-clock-history"></i> Transaction History</h4>
+    <p>View all your wallet transactions</p>
+</div>
+
+<div class="card-modern mb-3">
+    <form method="get" class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label style="color: #1e293b;" class="mb-2">Filter by Wallet</label>
+            <select name="wallet" class="form-control form-control-modern">
+                <option value="">All Wallets</option>
+                {% for key, label in wallet_choices %}
+                <option value="{{ key }}" {% if selected_wallet == key %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary-modern">
+                <i class="bi bi-funnel me-1"></i>Filter
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="table-modern">
+    <table class="table table-hover mb-0">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Wallet</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for txn in txns %}
+            <tr>
+                <td>{{ txn.created_at|date:"d M Y H:i" }}</td>
+                <td><span class="badge-modern badge-info">{{ txn.get_wallet_type_display }}</span></td>
+                <td>
+                    {% if txn.txn_type == 'credit' %}
+                    <span class="badge-modern badge-success">CREDIT</span>
+                    {% else %}
+                    <span class="badge-modern badge-danger">DEBIT</span>
+                    {% endif %}
+                </td>
+                <td class="{% if txn.txn_type == 'credit' %}text-success{% else %}text-danger{% endif %} fw-bold">
+                    {% if txn.txn_type == 'credit' %}+{% else %}-{% endif %}₹{{ txn.amount|floatformat:2 }}
+                </td>
+                <td>{{ txn.description }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center py-5">
+                    <i class="bi bi-inbox fs-1 d-block mb-3" style="color: #94a3b8;"></i>
+                    <p style="color: #64748b;">No transactions found.</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
