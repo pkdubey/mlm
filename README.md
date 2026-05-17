@@ -697,18 +697,12 @@ python manage.py migrate
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
 ## 👨💻 Developer Information
 
 **Project**: MLM Network Marketing System  
 **Version**: 2.0  
 **Status**: Production Ready 🚀  
-**Last Updated**: January 2025  
+**Last Updated**: May 2026  
 **Framework**: Django 4.2.16  
 **Python**: 3.8+
 
